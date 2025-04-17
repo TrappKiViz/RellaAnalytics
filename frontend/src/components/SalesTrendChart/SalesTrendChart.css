@@ -1,0 +1,65 @@
+.chart-container {
+  background-color: #ffffff;
+  border: 1px solid #fccdd3;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: 2px 2px 5px rgba(209, 54, 95, 0.1);
+  /* Ensure container provides space for the chart */
+  min-height: 300px; /* Adjust as needed */
+  display: flex; /* Use flexbox to manage inner layout */
+  flex-direction: column;
+}
+
+.chart-container h4 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #555;
+  text-align: center;
+  flex-shrink: 0; /* Prevent title from shrinking */
+}
+
+/* Class for the div containing the ResponsiveContainer */
+.chart-area.actual-chart {
+  flex-grow: 1; /* Allow chart area to take remaining space */
+  width: 100%;
+  display: flex; /* Center content if no data */
+  align-items: center;
+  justify-content: center;
+}
+
+/* Style for the no data message */
+.chart-area.actual-chart p {
+   color: #aaa;
+}
+
+/* Recharts specific tweaks if needed - e.g., font sizes */
+.recharts-tooltip-wrapper {
+  /* Default styling is applied, but we use content prop now */
+  /* We can style the custom tooltip directly */
+}
+
+.recharts-label {
+    font-size: 0.8em;
+    fill: #666; /* Darker label color */
+}
+
+/* Custom Tooltip Styling */
+.custom-tooltip {
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid #fccdd3;
+  padding: 10px;
+  border-radius: 3px;
+  box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
+}
+
+.custom-tooltip .label {
+  font-weight: bold;
+  margin: 0 0 5px 0;
+  color: #333;
+}
+
+.custom-tooltip .intro {
+  margin: 0;
+  color: #d1365f;
+} 

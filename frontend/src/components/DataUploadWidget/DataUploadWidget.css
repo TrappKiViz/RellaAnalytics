@@ -1,0 +1,127 @@
+.data-upload-widget-container {
+  background-color: #f0f0f0; /* Neutral background */
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.data-upload-widget-container h4 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #333;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 8px;
+}
+
+.upload-area {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.upload-area input[type="file"] {
+  flex-grow: 1;
+  /* Basic styling for file input */
+}
+
+.upload-area button {
+  padding: 8px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.upload-area button:hover {
+  background-color: #0056b3;
+}
+
+.upload-area button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+.message-area {
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 10px;
+  border: 1px solid transparent;
+}
+
+.message-area.status-success {
+  background-color: #d4edda;
+  color: #155724;
+  border-color: #c3e6cb;
+}
+
+.message-area.status-error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border-color: #f5c6cb;
+}
+
+.message-area.status-validating {
+  background-color: #fff3cd;
+  color: #856404;
+  border-color: #ffeeba;
+}
+
+.upload-step {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+}
+
+.upload-step h5 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #666;
+}
+
+.process-step {
+  border-top: 1px dashed #ccc;
+  padding-top: 15px;
+  margin-top: 15px;
+}
+
+.process-step p {
+  margin-bottom: 10px;
+}
+
+.process-step button {
+   background-color: #dc3545; /* Red for dangerous action */
+}
+
+.process-step button:hover {
+   background-color: #c82333;
+}
+
+.process-step button:disabled {
+   background-color: #aaa;
+}
+
+.upload-instructions {
+  margin-top: auto; /* Push to bottom */
+  padding-top: 15px;
+  border-top: 1px dashed #ccc;
+  font-size: 0.9em;
+  color: #555;
+}
+
+.upload-instructions p {
+  margin: 0 0 5px 0;
+  font-weight: bold;
+}
+
+.upload-instructions code {
+  background-color: #e8e8e8;
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-family: monospace;
+} 

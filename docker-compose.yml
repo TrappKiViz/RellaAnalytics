@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine # Use a specific version of PostgreSQL
+    container_name: rella_db
+    restart: always
+    environment:
+      POSTGRES_USER: rella_user
+      POSTGRES_PASSWORD: rella_password # Change this in a real environment!
+      POSTGRES_DB: rella_analytics
+    ports:
+      - "5432:5432" # Map host port 5432 to container port 5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data # Persist data using a named volume
+
+  # Add backend service here later if needed for linking
+  # backend:
+  #   build: ./backend
+  #   ports:
+  #     - "5001:5001"
+  #   depends_on:
+  #     - db
+  #   environment:
+  #     - DATABASE_URL=postgresql://rella_user:rella_password@db:5432/rella_analytics
+
+volumes:
+  postgres_data: # Define the named volume 

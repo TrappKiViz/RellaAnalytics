@@ -1,0 +1,78 @@
+/* Basic Reset & Global Styles */
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  /* Keep dark mode colors, but we can override with light pink theme */
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  /* Override background for our app */
+  background-color: #fff5f7; /* Very light pinkish background */
+  color: #333; /* Default text color for light theme */
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+/* Add other global styles or resets here */
+
+/* App Layout Styles */
+.app-layout {
+  display: flex;
+  min-height: 100vh; /* Ensure layout takes full viewport height */
+  width: 100%; /* Ensure layout takes full viewport width */
+}
+
+.main-content {
+  flex-grow: 1; /* Allow main content to take remaining space horizontally */
+  padding: 20px; 
+  /* Make it a flex container to control child (<main>) height */
+  display: flex;
+  flex-direction: column;
+  /* background-color: #fff; Optional: White background for content area */
+  /* You might need overflow-y: auto; if content exceeds viewport */
+}
+
+/* Target the main element directly inside .main-content */
+.main-content > main {
+  flex-grow: 1; /* Allow main content area to fill vertical space */
+  /* Add overflow if content might exceed space, e.g., for non-map pages */
+  /* overflow-y: auto; */ 
+}
+
+/* Ensure the root element takes full width/height */
+#app {
+  width: 100%;
+  height: 100%;
+  /* Override the centering from default Vite body styles */
+  display: block; 
+  place-items: initial; 
+}
+
+/* Override body styles if they interfere */
+body {
+  /* Remove centering if it was added by default */
+  display: block; /* Or flex with flex-direction: column if needed */
+  place-items: initial; 
+  /* Ensure body takes full width */
+  width: 100%;
+  min-height: 100vh;
+} 

@@ -1,0 +1,39 @@
+.ai-summary-card {
+  background-color: #e9e6ff; /* Light lavender background */
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+  height: 100%; /* Fill grid area */
+  display: flex;
+  flex-direction: column;
+  color: #333; /* Darker text for contrast */
+}
+
+.ai-summary-title {
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #5a4fcf; /* Purple accent color */
+  margin-top: 0;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #dcd6ff;
+  padding-bottom: 10px;
+}
+
+.ai-summary-icon {
+  margin-right: 10px;
+  font-size: 1.2rem;
+}
+
+.ai-summary-content {
+  flex-grow: 1; /* Allow content to fill space */
+  overflow-y: auto; /* Add scroll if content is long */
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.ai-summary-content p {
+  margin-top: 0;
+  white-space: pre-wrap; /* Preserve line breaks from summary string */
+}

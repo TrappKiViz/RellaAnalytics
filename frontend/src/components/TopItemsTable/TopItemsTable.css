@@ -1,0 +1,42 @@
+.table-container {
+  background-color: #ffffff;
+  border: 1px solid #fccdd3;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: 2px 2px 5px rgba(209, 54, 95, 0.1);
+}
+
+.table-container h4 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #555;
+}
+
+.items-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.items-table th,
+.items-table td {
+  border-bottom: 1px solid #ffe4e9;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.items-table th {
+  background-color: #fffafa; /* Very subtle pink */
+  color: #d1365f;
+  font-weight: bold;
+}
+
+.items-table tbody tr:hover {
+  background-color: #fff5f7;
+}
+
+.no-data-message {
+  color: #aaa;
+  text-align: center;
+  padding: 20px;
+} 

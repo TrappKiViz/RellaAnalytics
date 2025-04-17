@@ -1,0 +1,17 @@
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-main {
+  display: flex;
+  flex-grow: 1;
+}
+
+.app-content {
+  flex-grow: 1;
+  padding: 20px;
+  /* Add a subtle background */
+  background-color: #fff5f7; /* Very light pinkish background */
+} 

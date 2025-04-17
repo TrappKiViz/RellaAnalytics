@@ -1,0 +1,25 @@
+# Cursor Rules for Rella Analytics Project
+
+*(This file captures project-specific patterns, preferences, and intelligence learned during development.)*
+
+## Key Learnings & Patterns
+
+*   **Data Granularity is Critical:** The initial `Product Sales.csv` lacks timestamps and transaction IDs, preventing meaningful time series forecasting and association rule mining. Aggregate data is insufficient for these predictive tasks. (See `memory-bank/data_requirements.md`).
+*   **Simulated Data:** Time series forecasting on simulated dates (derived from aggregate data) produces artificial results and should only be used for illustration, clearly marking its limitations.
+
+## User Preferences
+
+*   Prioritizes seeing illustrative examples (even simulated ones) to demonstrate concepts to stakeholders.
+*   Prefers Python/Flask for backend, React for frontend.
+*   Wants AI (Cursor) to select appropriate initial ML algorithms.
+
+## Project Intelligence
+
+*   Initial data exploration completed.
+*   Basic backend/frontend/documentation structure established.
+*   Database schema designed, API endpoints defined.
+
+## Tool Usage
+
+*   Use `docker compose` (space, not hyphen) for Docker orchestration if available.
+*   Use temporary Python scripts (`_temp_*.py`) for complex analysis execution via terminal, then delete them. 

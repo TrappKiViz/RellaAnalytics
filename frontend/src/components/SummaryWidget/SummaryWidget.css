@@ -1,0 +1,24 @@
+.summary-widget-container {
+  background-color: #e9f5ff; /* Light blue background */
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #b3d7ff; /* Light blue border */
+  height: 100%; /* Allow it to fill grid space */
+  display: flex;
+  flex-direction: column;
+}
+
+.summary-widget-container h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #0056b3; /* Darker blue heading */
+  border-bottom: 1px solid #b3d7ff;
+  padding-bottom: 5px;
+}
+
+.summary-content p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #333;
+  margin: 0;
+} 
