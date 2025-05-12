@@ -1,3 +1,24 @@
+/* Import react-tooltip styles */
+@import 'react-tooltip/dist/react-tooltip.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Add any custom base styles here */
+body {
+  @apply bg-gray-100 text-gray-900;
+}
+
+/* Custom scrollbar utility (optional) */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 /* Basic Reset & Global Styles */
 
 :root {
@@ -6,7 +27,6 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  /* Keep dark mode colors, but we can override with light pink theme */
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
 
@@ -14,6 +34,16 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* --- Pink Theme Colors --- */
+  --color-bg: #fff5f7;
+  --color-bg-alt: #fffafa;
+  --color-primary: #d1365f;
+  --color-secondary: #ffe4e9;
+  --color-accent: #fccdd3;
+  --color-dark: #d1365f;
+  --color-text: #333;
+  --color-text-light: #fff5f7;
 }
 
 body {
@@ -22,9 +52,8 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  /* Override background for our app */
-  background-color: #fff5f7; /* Very light pinkish background */
-  color: #333; /* Default text color for light theme */
+  background: linear-gradient(135deg, #fff5f7 0%, #ffe4e9 100%);
+  color: #333;
 }
 
 h1 {
@@ -75,4 +104,13 @@ body {
   /* Ensure body takes full width */
   width: 100%;
   min-height: 100vh;
+}
+
+.glass-card {
+  background: rgba(255,255,255,0.3) !important;
+  border: 1px solid rgba(255,255,255,0.3) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 32px rgba(209,54,95,0.08) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
 } 

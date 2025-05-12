@@ -1,10 +1,12 @@
 .chart-container {
-  background-color: #ffffff;
-  border: 1px solid #fccdd3;
-  border-radius: 5px;
+  background: rgba(255,255,255,0.3);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 16px;
+  box-shadow: 0 4px 32px rgba(209,54,95,0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   padding: 15px;
   margin-bottom: 20px;
-  box-shadow: 2px 2px 5px rgba(209, 54, 95, 0.1);
   /* Ensure container provides space for the chart */
   min-height: 300px; /* Adjust as needed */
   display: flex; /* Use flexbox to manage inner layout */

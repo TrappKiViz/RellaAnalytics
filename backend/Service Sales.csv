@@ -1,0 +1,113 @@
+Service category_name,Service name,Service Sales,Service Sales Tax,Service Count,Service Client Count,Service Sales per Appointment
+All,All,175715.15,0.0,3634.0,1353.0,58.087652892562
+Facials,All,29342.3,0.0,336.0,217.0,101.882986111111
+Facials,Acne Facial,1285.0,0.0,11.0,8.0,116.818181818182
+Facials,Anti Aging Facial,607.5,0.0,6.0,5.0,101.25
+Facials,Deluxe Hydrafacial,14760.0,0.0,125.0,97.0,118.08
+Facials,Dermaplaning Add On,356.0,0.0,10.0,8.0,35.6
+Facials,Dermaplaning Basic Facial,300.0,0.0,7.0,6.0,42.857142857143
+Facials,Dermaplaning Deluxe Facial,465.0,0.0,3.0,3.0,155.0
+Facials,Express Facial,246.5,0.0,3.0,3.0,82.166666666667
+Facials,Hands Hydrafacial,0.0,0.0,1.0,1.0,0.0
+Facials,Initial Skin Health Consult,0.0,0.0,61.0,59.0,0.0
+Facials,Jelly Mask,138.0,0.0,7.0,6.0,19.714285714286
+Facials,Microdermabrasion Basic Facial,509.3,0.0,7.0,7.0,72.757142857143
+Facials,Microdermabrasion Deluxe Facial,890.0,0.0,6.0,6.0,148.333333333333
+Facials,Perk Eye Add-On (Hydrafacial),240.0,0.0,8.0,8.0,30.0
+Facials,Perk Lip Add-On (HydraFacial),240.0,0.0,6.0,4.0,40.0
+Facials,Platinum Hydrafacial,2805.0,0.0,17.0,14.0,165.0
+Facials,Signature Hydrafacial,6500.0,0.0,58.0,51.0,112.068965517241
+IV Hydration,All,7612.5,0.0,58.0,43.0,131.25
+IV Hydration,Beauty/Glow Blend,1275.0,0.0,11.0,9.0,115.909090909091
+IV Hydration,Hangover Cure,400.0,0.0,10.0,7.0,40.0
+IV Hydration,Immunity Blend,3062.5,0.0,20.0,19.0,153.125
+IV Hydration,Migraine/Pain Relief,50.0,0.0,1.0,1.0,50.0
+IV Hydration,Myers' Cocktail,1925.0,0.0,13.0,9.0,148.076923076923
+IV Hydration,NAD + Therapy,900.0,0.0,3.0,3.0,300.0
+Injectables,All,28376.33,0.0,1524.0,755.0,22.41416271722
+Injectables,Additional Syringe,62.5,0.0,67.0,43.0,1.453488372093
+Injectables,B-12 Injection,2185.0,0.0,115.0,58.0,19.0
+Injectables,B-Complex,625.0,0.0,14.0,10.0,44.642857142857
+Injectables,Botox & Filler,2100.0,0.0,47.0,45.0,44.68085106383
+Injectables,Botox/Dysport Return Clients,2952.55,0.0,382.0,339.0,7.729188481675
+Injectables,Dermal Fillers,9937.5,0.0,151.0,123.0,65.811258278146
+Injectables,Dysport,353.33,0.0,133.0,129.0,2.656616541353
+Injectables,Glutathione,850.0,0.0,22.0,10.0,38.636363636364
+Injectables,Hylenex,1300.0,0.0,12.0,11.0,108.333333333333
+Injectables,Kybella,1395.45,0.0,11.0,8.0,126.859090909091
+Injectables,NEW PATIENT BOTOX/DYSPORT,2790.0,0.0,219.0,215.0,12.739726027397
+Injectables,Neurotoxins (Botox/Dysport) /Filler/PRP/Sculptra Follow Up,180.0,0.0,290.0,249.0,0.622837370242
+Injectables,New Patient Consult,0.0,0.0,2.0,2.0,0.0
+Injectables,PRP Hair Restoration,1520.0,0.0,5.0,4.0,304.0
+Injectables,PRP Injection,0.0,0.0,1.0,1.0,0.0
+Injectables,Pronox,985.0,0.0,21.0,17.0,46.904761904762
+Injectables,Sculptra,780.0,0.0,19.0,14.0,41.052631578947
+Injectables,Vitamin D,360.0,0.0,13.0,8.0,27.692307692308
+LHR Treatment Packages,All,17539.85,0.0,156.0,59.0,147.393697478992
+LHR Treatment Packages,Laser Hair Removal - Large Area Package,4590.0,0.0,21.0,9.0,229.5
+LHR Treatment Packages,Laser Hair Removal - Medium Area Package,5467.49,0.0,40.0,20.0,143.881315789474
+LHR Treatment Packages,Laser Hair Removal - Small Area Package,7482.36,0.0,95.0,43.0,89.075714285714
+Laser,All,64361.67,0.0,394.0,196.0,189.299029411765
+Laser,Body Tone- Muscle Toning 1x treatment,375.0,0.0,13.0,5.0,28.846153846154
+Laser,BodySculpt' Contouring1x treatment,927.0,0.0,16.0,7.0,92.7
+Laser,C02 Décolleté Add On,2750.0,0.0,11.0,10.0,275.0
+Laser,C02 For You Bundle,7929.0,0.0,8.0,8.0,991.125
+Laser,C02 Hands Add on,150.0,0.0,2.0,2.0,75.0
+Laser,C02 Neck Add On,5450.0,0.0,19.0,19.0,286.842105263158
+Laser,C02 Skin Resurfacing,10400.0,0.0,24.0,24.0,433.333333333333
+Laser,C02 Skin Resurfacing Special $750,13150.0,0.0,17.0,17.0,773.529411764706
+Laser,C02 Skin Resurfacing Special $997,1994.0,0.0,3.0,3.0,664.666666666667
+Laser,C02- Follow up,0.0,0.0,31.0,28.0,0.0
+Laser,Erbium Hands Add-On,50.0,0.0,1.0,1.0,50.0
+Laser,Erbium Neck Add-On,100.0,0.0,1.0,1.0,100.0
+Laser,IPL - Full Face,3870.0,0.0,29.0,20.0,133.448275862069
+Laser,IPL - Hands Add-On,0.0,0.0,1.0,1.0,0.0
+Laser,IPL Full Face - Package (3 Treatments),5066.67,0.0,15.0,9.0,337.778
+Laser,IPL Neck Add-On,200.0,0.0,2.0,2.0,100.0
+Laser,Initial Laser Consult,0.0,0.0,90.0,88.0,0.0
+Laser,Laser Hair Removal Large Area - a la carte,120.0,0.0,3.0,2.0,40.0
+Laser,Laser Hair Removal Medium Area - a la carte,120.0,0.0,12.0,8.0,12.0
+Laser,Laser Hair Removal Small Area - a la carte,1255.0,0.0,26.0,18.0,48.269230769231
+Laser,PRP Add-On,1925.0,0.0,14.0,10.0,137.5
+Laser,Shaving Fee,75.0,0.0,1.0,1.0,75.0
+Laser,Skin Resurfacing Erbium Face + Neck Package (3 Treatments),0.0,0.0,1.0,1.0,0.0
+Laser,Skin Resurfacing Full Face - Erbium,2250.0,0.0,3.0,2.0,750.0
+Laser,Spider Vein Removal,665.0,0.0,5.0,5.0,133.0
+Laser,Spot Treatment with Lasers,350.0,0.0,2.0,2.0,175.0
+Laser,Tattoo Removal,5190.0,0.0,43.0,28.0,120.697674418605
+Laser,Vaginal Rejuvenation,0.0,0.0,1.0,1.0,0.0
+MEMBER MONTHLY SPECIALS,All,5801.0,0.0,15.0,15.0,386.733333333333
+MEMBER MONTHLY SPECIALS,BodyTone Special,0.0,0.0,1.0,1.0,0.0
+MEMBER MONTHLY SPECIALS,C02 Special,500.0,0.0,3.0,3.0,166.666666666667
+MEMBER MONTHLY SPECIALS,Erbium Special,1250.0,0.0,3.0,3.0,416.666666666667
+MEMBER MONTHLY SPECIALS,Hydrafacial Special,300.0,0.0,2.0,2.0,150.0
+MEMBER MONTHLY SPECIALS,IPL special,550.0,0.0,3.0,3.0,183.333333333333
+MEMBER MONTHLY SPECIALS,IV Special,150.0,0.0,1.0,1.0,150.0
+MEMBER MONTHLY SPECIALS,Laser Hair Removal - Medium Area,3051.0,0.0,2.0,2.0,1525.5
+Microneedling,All,12742.5,0.0,52.0,32.0,265.46875
+Microneedling,Initial Microneedling Consult,0.0,0.0,15.0,15.0,0.0
+Microneedling,RF Microneedling,1450.0,0.0,10.0,8.0,145.0
+Microneedling,RF Microneedling Face + Neck Package (3 Treatments),5192.5,0.0,13.0,7.0,399.423076923077
+Microneedling,RF Microneedling Face Package (3 Treatments),2700.0,0.0,6.0,3.0,450.0
+Microneedling,RF Microneedling Neck Add-On,150.0,0.0,1.0,1.0,150.0
+Microneedling,Skin Stylus Microneedling,0.0,0.0,1.0,1.0,0.0
+Microneedling,Skin Stylus Microneedling Package (3 Treatments),3250.0,0.0,5.0,4.0,650.0
+Microneedling,Skin Stylus Neck Add on,0.0,0.0,1.0,1.0,0.0
+Peels,All,2507.0,0.0,15.0,14.0,167.133333333333
+Peels,MicroPeel Plus 20,150.0,0.0,1.0,1.0,150.0
+Peels,MicroPeel Sensitive,405.0,0.0,3.0,3.0,135.0
+Peels,TCA Peel,480.0,0.0,2.0,2.0,240.0
+Peels,Universal Peel,1472.0,0.0,9.0,8.0,163.555555555556
+Private Events,All,852.0,0.0,60.0,58.0,14.2
+Private Events,Botox & Filler,200.0,0.0,11.0,11.0,18.181818181818
+Private Events,Botox / Dysport,602.0,0.0,40.0,39.0,15.05
+Private Events,Filler,0.0,0.0,8.0,8.0,0.0
+Private Events,Kybella,50.0,0.0,1.0,1.0,50.0
+Weight Loss,All,6580.0,0.0,1024.0,306.0,6.586586586587
+Weight Loss,1st Weight Loss Appt (AFTER CONSULT),525.0,0.0,68.0,68.0,7.720588235294
+Weight Loss,Lipo-C / MIC,2405.0,0.0,87.0,24.0,27.64367816092
+Weight Loss,Semaglutide - monthly pickup/weigh in,1600.0,0.0,385.0,180.0,4.166666666667
+Weight Loss,Semaglutide - weekly injection,1875.0,0.0,329.0,58.0,5.699088145897
+Weight Loss,Semaglutide/Tirzepatide Phone Consultation,0.0,0.0,102.0,101.0,0.0
+Weight Loss,Tirzepatide - monthly pickup,0.0,0.0,22.0,13.0,0.0
+Weight Loss,Tirzepatide - weekly injection,175.0,0.0,31.0,8.0,5.645161290323

@@ -34,7 +34,7 @@ const CustomerDensityMap = ({ customerCoords }) => { // Remove unused props
             // Scatterplot layer props
             getRadius: 50, // Radius in pixels (adjust as needed)
             radiusUnits: 'pixels',
-            getFillColor: [209, 55, 78, 180], // Use one of the theme colors (e.g., red/pink)
+            getFillColor: [82, 121, 111, 180], // #52796f with alpha
             pickable: true, // Allow hover
         })
     ], [customerCoords]); // Only depends on coordinates now

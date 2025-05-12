@@ -6,17 +6,27 @@ import {
   Outlet // For nested routes within layout
 } from 'react-router-dom';
 
-import DashboardPage from './pages/DashboardPage/DashboardPage';
+// import DashboardPage from './pages/DashboardPage/DashboardPage'; // REMOVE
 import LoginPage from './pages/LoginPage/LoginPage'; // Import LoginPage
-import MapViewPage from './pages/MapViewPage/MapViewPage'; // Import MapViewPage
+// import MapViewPage from './pages/MapViewPage/MapViewPage'; // REMOVE
 // Import other pages
 import ReportsPage from './pages/ReportsPage/ReportsPage';
 import SettingsPage from './pages/SettingsPage/SettingsPage';
-import Sidebar from './components/Sidebar/Sidebar'; // Assuming Sidebar exists
+import Sidebar from './components/Sidebar/Sidebar'; // Corrected path
 import Header from './components/Header/Header'; // Assuming Header exists
+// import ProfitabilityAnalyticsPage from './pages/ProfitabilityAnalyticsPage.jsx'; // <-- Old page import
+
+// --- Import Profit Analytics Components ---
+import ProfitAnalyticsLayout from './components/profit-analytics/ProfitAnalyticsLayout';
+import ProfitOverview from './components/profit-analytics/ProfitOverview';
+import ProductProfitability from './components/profit-analytics/ProductProfitability';
+import ServiceProfitability from './components/profit-analytics/ServiceProfitability';
+import DiscountImpact from './components/profit-analytics/DiscountImpact';
+import MarginTrends from './components/profit-analytics/MarginTrends';
+// --- End Profit Analytics Imports ---
 
 import './index.css';
-import { checkAuthStatus, logout } from './services/api'; // Import auth functions
+// import { checkAuthStatus, logout } from './services/api'; // Import auth functions
 
 // Protected Route Component
 const ProtectedLayout = ({ isLoggedIn, onLogout }) => {
@@ -30,7 +40,7 @@ const ProtectedLayout = ({ isLoggedIn, onLogout }) => {
       <div className="main-content">
         <Header /> {/* Add a simple header if needed */}
         <main>
-           <Outlet /> {/* Child routes (Dashboard, Reports, Settings) render here */}
+           <Outlet /> {/* Child routes render here */}
         </main>
       </div>
     </div>
@@ -72,7 +82,7 @@ function App() {
 
   // Show loading indicator while checking auth status
   if (isLoggedIn === null) {
-    return <div>Loading...</div>; // Or a proper loading spinner
+    return <div className="flex justify-center items-center h-screen"><div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-indigo-500"></div></div>; // Fixed className
   }
 
   return (
@@ -80,18 +90,31 @@ function App() {
       {/* Public Login Route */}
       <Route 
          path="/login" 
-         element={isLoggedIn ? <Navigate to="/" /> : <LoginPage onLoginSuccess={handleLoginSuccess} />} 
+         element={isLoggedIn ? <Navigate to="/profitability" /> : <LoginPage onLoginSuccess={handleLoginSuccess} />} // Redirect to /profitability
       />
       
       {/* Protected Routes within Layout */}
       <Route element={<ProtectedLayout isLoggedIn={isLoggedIn} onLogout={handleLogout} />}>
-          <Route path="/" element={<DashboardPage />} />
-          <Route path="/map" element={<MapViewPage />} />
-          {/* Add routes for Reports and Settings */}
+          {/* <Route path="/" element={<DashboardPage />} /> REMOVE */}
+          {/* <Route path="/map" element={<MapViewPage />} /> REMOVE */}
           <Route path="/reports" element={<ReportsPage />} />
           <Route path="/settings" element={<SettingsPage />} />
-          {/* Add a catch-all or redirect for unknown protected routes if needed */}
-          <Route path="*" element={<Navigate to="/" replace />} /> 
+          
+          {/* --- Profit Analytics Nested Routes --- */}
+          <Route path="/profitability" element={<ProfitAnalyticsLayout />}>
+            <Route index element={<ProfitOverview />} />
+            <Route path="overview" element={<ProfitOverview />} />
+            <Route path="products" element={<ProductProfitability />} />
+            <Route path="services" element={<ServiceProfitability />} />
+            <Route path="discounts" element={<DiscountImpact />} />
+            <Route path="trends" element={<MarginTrends />} />
+             {/* Optional: Add a redirect or default for unknown sub-paths */}
+             <Route path="*" element={<Navigate to="overview" replace />} /> 
+          </Route>
+          {/* --- End Profit Analytics Routes --- */}
+
+          {/* Redirect unknown top-level protected routes to /profitability */}
+          <Route path="*" element={<Navigate to="/profitability" replace />} /> 
       </Route>
 
     </Routes>

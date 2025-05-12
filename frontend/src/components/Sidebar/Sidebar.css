@@ -1,6 +1,7 @@
 .app-sidebar {
   width: 220px;
-  background-color: #fff0f3; /* Lighter pink than header */
+  background-color: #fff0f3;
+  color: #333;
   padding: 20px 0;
   border-right: 1px solid #fccdd3;
   flex-shrink: 0; /* Prevent shrinking */

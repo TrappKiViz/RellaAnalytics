@@ -43,26 +43,35 @@ const SalesForecastChart = ({ historicalData, forecastData, note }) => {
   const combinedData = historicalData.map(h => ({ ...h })); // Copy historical
   
   if (forecastData && forecastData.length > 0) {
-    const lastHistoricalDate = historicalData.length > 0 ? historicalData[historicalData.length - 1].date : null;
+    const historicalDates = new Set(historicalData.map(h => h.date));
     forecastData.forEach(f => {
-      // Only add forecast point if it's after the last historical point
-      if (!lastHistoricalDate || f.date > lastHistoricalDate) {
-          // Check if date already exists (shouldn't if logic is right, but safe check)
+      // Add forecast point if its date is not already in the historical set
+      if (!historicalDates.has(f.date)) {
+          // Check if date ALREADY exists in combinedData (from a previous forecast point - unlikely but safe)
           const existingIndex = combinedData.findIndex(c => c.date === f.date);
           if (existingIndex === -1) {
-              combinedData.push({ 
+              combinedData.push({
                   date: f.date, 
                   mean: f.mean, 
                   mean_ci_lower: f.mean_ci_lower, 
                   mean_ci_upper: f.mean_ci_upper 
               });
+          } // else: Skip if somehow already added
+      } else {
+          // If date exists in historical data, find it and ADD forecast values
+          const existingDataPoint = combinedData.find(c => c.date === f.date);
+          if (existingDataPoint) {
+              existingDataPoint.mean = f.mean;
+              existingDataPoint.mean_ci_lower = f.mean_ci_lower;
+              existingDataPoint.mean_ci_upper = f.mean_ci_upper;
           } else {
-             // This case implies overlap - might need merging logic if needed
-             // For now, assume forecast starts after historical
-             console.warn("Overlap detected between historical and forecast data", f.date);
+              // Should not happen if historicalDates.has(f.date) is true
+              console.error("Logic error: Historical date not found in combinedData", f.date);
           }
       }
     });
+    // Ensure data is sorted by date after merging
+    combinedData.sort((a, b) => new Date(a.date) - new Date(b.date));
   }
 
   const hasData = combinedData.length > 0;

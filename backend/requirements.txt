@@ -6,6 +6,7 @@ Flask-Cors>=3.0
 python-dotenv>=1.0 # Added for .env support
 Werkzeug>=2.0 # Flask dependency, good to specify
 click>=8.0 # Flask CLI dependency
+Flask-Caching # Add caching library
 
 # Authentication & Session Management
 Flask-Login>=0.6 # For user session management
@@ -13,21 +14,9 @@ Flask-Login>=0.6 # For user session management
 # Data Handling & Analysis
 pandas>=1.3
 statsmodels>=0.13 # For SARIMA forecasting
-# mlxtend>=0.19 # Temporarily removed due to endpoint issues
-numpy>=1.20 # Dependency for pandas, statsmodels, mlxtend
-scipy>=1.7 # Dependency for statsmodels, mlxtend
 patsy>=0.5 # Dependency for statsmodels
-joblib>=1.0 # Dependency for mlxtend/scikit-learn
-scikit-learn>=1.0 # Dependency for mlxtend (if re-added)
-
-# Google AI (if resuming Gemini integration)
-google-generativeai>=0.4
-
-# Flask-CORS>=3.0 # Added for Cross-Origin Resource Sharing
-# pandas>=1.0 # Needed when reading CSV/Excel directly
-# prophet>=1.0 # Needed for time series forecasting
-# scikit-learn # Needed for other ML models
-# psycopg2-binary # Needed for PostgreSQL connection
+prophet>=1.0 # Added for forecasting
+plotly>=5.0 # Added for interactive plots
 
 # API Interaction
 requests>=2.20 # Added for calling external APIs (Boulevard) 

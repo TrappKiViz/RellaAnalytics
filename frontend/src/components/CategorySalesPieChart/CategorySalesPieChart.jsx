@@ -6,10 +6,15 @@ import '../SalesTrendChart/SalesTrendChart.css'; // Reuse chart container CSS
 import * as d3 from 'd3-scale-chromatic'; // Import d3-scale-chromatic for color schemes
 
 // Use a more distinct color scheme like Tableau10
-const COLORS = d3.schemeTableau10;
+const PIE_COLORS = [
+  '#cad2c5', // Light Sage
+  '#84a98c', // Sage Green
+  '#52796f', // Deep Green/Teal
+  '#354f52', // Dark Slate
+  '#2f3e46', // Almost Black/Green
+];
 
 // Original light pink/red scheme (for reference)
-/*
 const COLORS = [
     '#FFCDD2', // Lightest Pink
     '#EF9A9A', 
@@ -22,7 +27,6 @@ const COLORS = [
     '#B71C1C', // Darkest Red
     '#FF8A80'  // Coral accent
 ];
-*/
 
 // Accept dataKey prop (e.g., 'value', 'growth', 'count')
 const CategorySalesPieChart = ({ data, dataKey = 'value' }) => {

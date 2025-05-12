@@ -1,0 +1,71 @@
+import csv
+
+# Define the inventory data
+inventory_data = [
+    ["Product", "Avg Unit Cost", "Retail Price"],
+    ["Botox", "8.00", "15.00"],
+    ["Dysport", "7.50", "14.00"],
+    ["Juvederm Ultra XC", "350.00", "700.00"],
+    ["Juvederm Voluma XC", "400.00", "800.00"],
+    ["Juvederm Vollure XC", "375.00", "750.00"],
+    ["Restylane Contour", "350.00", "700.00"],
+    ["Juvederm Ultra Plus 1ML", "375.00", "750.00"],
+    ["Juvederm Ultra XC .55mL", "200.00", "400.00"],
+    ["Juvederm Volbella XC", "350.00", "700.00"],
+    ["Juvederm Volux XC", "400.00", "800.00"],
+    ["Restylane Defyne", "350.00", "700.00"],
+    ["Restylane Eyelight", "350.00", "700.00"],
+    ["Restylane Kysse", "350.00", "700.00"],
+    ["Restylane L", "325.00", "650.00"],
+    ["Restylane Lyft", "350.00", "700.00"],
+    ["Restylane Refyne", "350.00", "700.00"],
+    ["PRP Injection", "150.00", "300.00"],
+    ["Semaglutide x1 Month Supply", "200.00", "400.00"],
+    ["Semaglutide x3 Month Supply", "550.00", "1200.00"],
+    ["Semaglutide x6 month Supply", "1000.00", "2200.00"],
+    ["Tirzepatide 1x Month", "250.00", "500.00"],
+    ["Tirzepatide 3X Months Supply", "700.00", "1500.00"],
+    ["Tirzepatide 1x Single Dose", "85.00", "170.00"],
+    ["B-Complex", "25.00", "50.00"],
+    ["Glutathione", "30.00", "60.00"],
+    ["NAD + Therapy", "150.00", "300.00"],
+    ["Myers' Cocktail", "50.00", "100.00"],
+    ["Hangover Cure", "75.00", "150.00"],
+    ["Beauty/Glow Blend", "60.00", "120.00"],
+    ["Immunity Blend", "50.00", "100.00"],
+    ["Migraine/Pain Relief", "60.00", "120.00"],
+    ["Vitamin D", "15.00", "30.00"],
+    ["B-12 Injection", "20.00", "40.00"],
+    ["Lipo-C / MIC", "25.00", "50.00"],
+    ["Powder Defense", "25.00", "50.00"],
+    ["Brightening Even Tone Pads", "30.00", "60.00"],
+    ["Hydroquinone Powder", "20.00", "40.00"],
+    ["AHA / BHA Exfoliating Polish", "25.00", "50.00"],
+    ["Aquaglow Hyaluronic Acid", "35.00", "70.00"],
+    ["Blemish + Age Defense", "40.00", "80.00"],
+    ["C E Ferulic", "85.00", "170.00"],
+    ["Complexion Gly-Sal Pads", "25.00", "50.00"],
+    ["Discoloration Defense", "45.00", "90.00"],
+    ["Dual Active Phyto GF", "50.00", "100.00"],
+    ["Glycolic 10 Renew Overnight", "35.00", "70.00"],
+    ["Hydrating B5 Gel", "40.00", "80.00"],
+    ["Lipid Cloud", "45.00", "90.00"],
+    ["P-TIOX", "40.00", "80.00"],
+    ["Peptide Neck Cream", "45.00", "90.00"],
+    ["Phyto Balance", "40.00", "80.00"],
+    ["Plump It! SPF 30", "35.00", "70.00"],
+    ["Radiant Glow Lactic Acid", "30.00", "60.00"],
+    ["Sheer Defense", "35.00", "70.00"],
+    ["Silymarin CF", "85.00", "170.00"],
+    ["Simply Clean", "25.00", "50.00"],
+    ["Skincare Kit", "150.00", "300.00"],
+    ["Tinted Defense", "35.00", "70.00"],
+    ["Blemish Corrective Treatment Serum", "40.00", "80.00"]
+]
+
+# Write to CSV file
+with open('inventory_on_hand_20250426.csv', 'w', newline='') as f:
+    writer = csv.writer(f)
+    writer.writerows(inventory_data)
+
+print("Inventory CSV file created successfully!") 
