@@ -33,6 +33,7 @@
     "d3-scale": "^4.0.2",
     "d3-scale-chromatic": "^3.1.0",
     "deck.gl": "^9.0.0",
+    "file-saver": "^2.0.5",
     "flask-cors": "^0.0.1",
     "mapbox-gl": "^3.0.0",
     "react-chartjs-2": "^5.3.0",
