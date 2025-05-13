@@ -35,4 +35,8 @@ export async function checkAuthStatus() {
 }
 
 export async function logout() {
-  await fetch(`
+  await fetch(`${API_BASE_URL}/v1/auth/logout`, {
+    method: 'POST',
+    credentials: 'include',
+  });
+}
