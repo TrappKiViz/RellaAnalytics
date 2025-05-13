@@ -12,6 +12,7 @@ export default defineConfig({
       // Keep localhost as well
       'localhost',
       '127.0.0.1',
+      'rellaanalyticsdb-1.onrender.com', // Allow Render frontend hosting
     ],
      // --- IMPORTANT: Add Proxy for API calls ---
      // If your frontend (running on e.g. 5173) calls your backend API (running on e.g. 5000),
