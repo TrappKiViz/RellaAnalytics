@@ -23,15 +23,16 @@ export async function checkAuthStatus() {
     method: 'GET',
     credentials: 'include',
   });
+  const contentType = response.headers.get('content-type');
   if (!response.ok) {
     return { isLoggedIn: false };
   }
-  return response.json();
+  if (contentType && contentType.includes('application/json')) {
+    return response.json();
+  } else {
+    return { isLoggedIn: false };
+  }
 }
 
 export async function logout() {
-  await fetch(`${API_BASE_URL}/v1/auth/logout`, {
-    method: 'POST',
-    credentials: 'include',
-  });
-} 
+  await fetch(`
