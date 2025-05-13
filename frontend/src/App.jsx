@@ -26,7 +26,7 @@ import MarginTrends from './components/profit-analytics/MarginTrends';
 // --- End Profit Analytics Imports ---
 
 import './index.css';
-// import { checkAuthStatus, logout } from './services/api'; // Import auth functions
+import { checkAuthStatus, logout } from './services/api';
 
 // Protected Route Component
 const ProtectedLayout = ({ isLoggedIn, onLogout }) => {
