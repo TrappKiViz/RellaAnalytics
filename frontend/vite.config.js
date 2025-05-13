@@ -14,17 +14,6 @@ export default defineConfig({
       '127.0.0.1',
       'rellaanalyticsdb-1.onrender.com', // Allow Render frontend hosting
     ],
-     // --- IMPORTANT: Add Proxy for API calls ---
-     // If your frontend (running on e.g. 5173) calls your backend API (running on e.g. 5000),
-     // you need this proxy to avoid CORS issues when accessing via ngrok.
-     proxy: {
-       '/api': { // Match requests starting with /api
-         target: 'http://127.0.0.1:5000', // Your Flask backend address
-         changeOrigin: true, // Recommended for virtual hosted sites
-         secure: false,      // Typically false for local http backend
-         // Optional: rewrite path if needed, e.g., remove /api prefix
-         // rewrite: (path) => path.replace(/^\/api/, ''),
-       },
-     },
+    // --- IMPORTANT: Proxy removed for production deployment on Render ---
   },
 });

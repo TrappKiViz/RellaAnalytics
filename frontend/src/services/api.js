@@ -1,7 +1,9 @@
 // API service functions for authentication
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api';
+
 export async function login({ username, password }) {
-  const response = await fetch('/api/v1/auth/login', {
+  const response = await fetch(`${API_BASE_URL}/v1/auth/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -17,7 +19,7 @@ export async function login({ username, password }) {
 }
 
 export async function checkAuthStatus() {
-  const response = await fetch('/api/v1/auth/status', {
+  const response = await fetch(`${API_BASE_URL}/v1/auth/status`, {
     method: 'GET',
     credentials: 'include',
   });
@@ -28,7 +30,7 @@ export async function checkAuthStatus() {
 }
 
 export async function logout() {
-  await fetch('/api/v1/auth/logout', {
+  await fetch(`${API_BASE_URL}/v1/auth/logout`, {
     method: 'POST',
     credentials: 'include',
   });
