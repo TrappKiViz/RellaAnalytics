@@ -1845,13 +1845,12 @@ def index():
     ]
     
     endpoint_html = ''.join([
-        f'''<div class="endpoint">
-            <div>
-                {''.join(f'<span class="method">{method}</span>' for method in ep['methods'])}
-                <span class="path">{ep['path']}</span>
-            </div>
-            <div class="description">{ep['description']}</div>
-        </div>'''
+        '<div class="endpoint">'
+        '<div>' + ''.join(f'<span class="method">{method}</span>' for method in ep['methods']) +
+        f'<span class="path">{ep["path"]}</span>'
+        '</div>'
+        f'<div class="description">{ep["description"]}</div>'
+        '</div>'
         for ep in endpoints
     ])
     html = f"""
