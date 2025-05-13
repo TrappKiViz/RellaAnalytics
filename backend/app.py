@@ -1844,6 +1844,16 @@ def index():
         }
     ]
     
+    endpoint_html = ''.join([
+        f'''<div class="endpoint">
+            <div>
+                {''.join(f'<span class="method">{method}</span>' for method in ep['methods'])}
+                <span class="path">{ep['path']}</span>
+            </div>
+            <div class="description">{ep['description']}</div>
+        </div>'''
+        for ep in endpoints
+    ])
     html = f"""
     <!DOCTYPE html>
     <html>
@@ -1851,7 +1861,7 @@ def index():
         <title>Rella Analytics API</title>
         <style>
             body {{
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
                 line-height: 1.6;
                 max-width: 1000px;
                 margin: 0 auto;
@@ -1909,15 +1919,7 @@ def index():
             
             <h2>Available Endpoints</h2>
             <div class="endpoints">
-                {''.join(f"""
-                    <div class="endpoint">
-                        <div>
-                            {''.join(f'<span class="method">{method}</span>' for method in ep['methods'])}
-                            <span class="path">{ep['path']}</span>
-                        </div>
-                        <div class="description">{ep['description']}</div>
-                    </div>
-                """ for ep in endpoints)}
+                {endpoint_html}
             </div>
             
             <h2>API Information</h2>
@@ -1930,7 +1932,6 @@ def index():
     </body>
     </html>
     """
-    
     return html
 
 @app.route('/api/test-boulevard-connection', methods=['GET'])
