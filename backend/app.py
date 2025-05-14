@@ -43,6 +43,7 @@ CORS(app,
             "http://localhost:5174",  # Vite alternate port
             "http://localhost:3000",  # React default port (if needed)
             "https://rella-analytics-frontend.onrender.com",  # Deployed frontend URL
+            "https://rellaanalyticsdb.onrender.com",  # Alternate deployed frontend URL
             os.getenv('FRONTEND_URL', '')  # Production URL if defined
         ],
         "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
@@ -52,15 +53,6 @@ CORS(app,
     supports_credentials=True
 )
 # --- End CORS Configuration ---
-
-# Ensure all responses include CORS headers
-@app.after_request
-def after_request(response):
-    response.headers.add('Access-Control-Allow-Origin', 'http://localhost:5173')
-    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
-    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
-    response.headers.add('Access-Control-Allow-Credentials', 'true')
-    return response
 
 # --- Flask App Configuration (Secrets, Session, etc.) ---
 # Load environment variables (ensure this happens before config use)
