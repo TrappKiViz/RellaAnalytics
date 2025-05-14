@@ -188,7 +188,7 @@ function ServiceProfitability() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((service) => (
+          {data.filter(service => service && service.id != null).map((service) => (
             <TableRow key={service.id} hover>
               <TableCell>{service.name}</TableCell>
               <TableCell align="right">{service.quantity}</TableCell>

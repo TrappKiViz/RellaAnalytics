@@ -206,7 +206,7 @@ function ProductProfitability(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((item) => (
+          {data.filter(item => item && item.id != null).map((item) => (
             <TableRow key={item.id} hover>
               <TableCell>{item.name}</TableCell>
               <TableCell sx={{ textTransform: 'capitalize' }}>{item.type}</TableCell>
