@@ -19,4 +19,7 @@ prophet>=1.0 # Added for forecasting
 plotly>=5.0 # Added for interactive plots
 
 # API Interaction
-requests>=2.20 # Added for calling external APIs (Boulevard) 
+requests>=2.20 # Added for calling external APIs (Boulevard)
+
+# Production Deployment
+gunicorn 
