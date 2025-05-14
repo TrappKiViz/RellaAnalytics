@@ -25,15 +25,15 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from prophet import Prophet # Import Prophet
 from dateutil.parser import isoparse # For parsing ISO 8601 dates
 from collections import defaultdict
-from .extensions import cache # Import cache object from extensions
+from extensions import cache # Import cache object from extensions
 import logging
 from functools import wraps
 from flask_caching import Cache
 
 # Import the boulevard client functions
-from . import boulevard_client
-from .database import get_db
-from .constants import BOULEVARD_CATEGORY_MAPPING
+import boulevard_client
+from database import get_db
+from constants import BOULEVARD_CATEGORY_MAPPING
 
 app = Flask(__name__, instance_relative_config=True, static_folder='static', static_url_path='') # Serve static files at root
 CORS(app, 
