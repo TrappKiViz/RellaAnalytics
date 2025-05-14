@@ -20,6 +20,8 @@ import ProductProfitability from './ProductProfitability';
 import ServiceProfitability from './ServiceProfitability';
 import DiscountImpact from './DiscountImpact';
 import MarginTrends from './MarginTrends';
+import ProfitForecast from './ProfitForecast';
+import WhatIfScenario from './WhatIfScenario';
 import useApiClient from '../../hooks/useApiClient';
 
 // Placeholder for a potential Date Range Picker component
@@ -65,6 +67,8 @@ const TAB_PATHS = {
   'products': 1,
   'services': 2,
   'discounts': 3,
+  'forecast': 4,
+  'what-if': 5,
 };
 
 const TAB_INDICES = {
@@ -72,6 +76,8 @@ const TAB_INDICES = {
   1: 'products',
   2: 'services',
   3: 'discounts',
+  4: 'forecast',
+  5: 'what-if',
 };
 
 function ProfitAnalyticsLayout() {
@@ -172,8 +178,9 @@ function ProfitAnalyticsLayout() {
           <StyledTab label="Overview" value={0} />
           <StyledTab label="Product Profitability" value={1} />
           <StyledTab label="Service Profitability" value={2} />
-          {/* <StyledTab label="Margin Trends" value={3} /> */}
           <StyledTab label="Discount Impact" value={3} />
+          <StyledTab label="Forecast" value={4} />
+          <StyledTab label="What-If" value={5} />
         </StyledTabs>
       </Paper>
 
