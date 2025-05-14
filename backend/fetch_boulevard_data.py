@@ -1,7 +1,7 @@
 import os
 import sqlite3
-from .boulevard_client import make_boulevard_request
-from .app import BOULEVARD_CATEGORY_MAPPING
+from boulevard_client import make_boulevard_request
+from app import BOULEVARD_CATEGORY_MAPPING
 
 def get_boulevard_services():
     """Fetch all services from Boulevard."""

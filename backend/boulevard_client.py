@@ -9,8 +9,8 @@ import re
 from datetime import datetime, timezone, timedelta
 
 # Import cache object from the new extensions module
-from .extensions import cache
-from .boulevard_queries import ORDER_DETAILS_QUERY, LOCATIONS_QUERY
+from extensions import cache
+from boulevard_queries import ORDER_DETAILS_QUERY, LOCATIONS_QUERY
 
 BOULEVARD_API_URL = "https://dashboard.boulevard.io/api/2020-01/admin"
 
