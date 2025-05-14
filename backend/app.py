@@ -1795,65 +1795,9 @@ def index():
     # Check if request wants JSON
     if request.headers.get('Accept') == 'application/json':
         return jsonify({"message": "Rella Analytics API is running"}), 200
-        
-    # Otherwise return HTML
-    endpoints = [
-        {
-            'path': '/api/v1/kpis',
-            'methods': ['GET'],
-            'description': 'Get key performance indicators'
-        },
-        {
-            'path': '/api/v1/sales/summary',
-            'methods': ['GET'],
-            'description': 'Get sales summary data'
-        },
-        {
-            'path': '/api/v1/sales/by_category',
-            'methods': ['GET'],
-            'description': 'Get sales data by category'
-        },
-        {
-            'path': '/api/v1/sales/over_time',
-            'methods': ['GET'],
-            'description': 'Get time-series sales data'
-        },
-        {
-            'path': '/api/v1/sales/forecast',
-            'methods': ['GET'],
-            'description': 'Get sales forecast'
-        },
-        {
-            'path': '/api/v1/locations',
-            'methods': ['GET'],
-            'description': 'Get available locations'
-        },
-        {
-            'path': '/api/v1/boulevard/categorized-orders',
-            'methods': ['GET'],
-            'description': 'Get categorized Boulevard orders'
-        },
-        {
-            'path': '/api/v1/auth/login',
-            'methods': ['POST'],
-            'description': 'Login endpoint'
-        },
-        {
-            'path': '/api/v1/auth/logout',
-            'methods': ['POST'],
-            'description': 'Logout endpoint'
-        }
-    ]
     
-    endpoint_html = ''.join([
-        '<div class="endpoint">'
-        '<div>' + ''.join(f'<span class="method">{method}</span>' for method in ep['methods']) +
-        f'<span class="path">{ep["path"]}</span>'
-        '</div>'
-        f'<div class="description">{ep["description"]}</div>'
-        '</div>'
-        for ep in endpoints
-    ])
+    # Otherwise return HTML with a clear message and a link to the frontend
+    frontend_url = "https://rella-analytics-frontend.onrender.com"
     html = f"""
     <!DOCTYPE html>
     <html>
@@ -1863,9 +1807,9 @@ def index():
             body {{
                 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
                 line-height: 1.6;
-                max-width: 1000px;
+                max-width: 600px;
                 margin: 0 auto;
-                padding: 20px;
+                padding: 40px;
                 background: #f5f5f5;
             }}
             .container {{
@@ -1873,61 +1817,36 @@ def index():
                 padding: 30px;
                 border-radius: 8px;
                 box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                text-align: center;
             }}
-            h1 {{
-                color: #2c3e50;
-                border-bottom: 2px solid #3498db;
-                padding-bottom: 10px;
-            }}
-            .status {{
+            h1 {{ color: #2c3e50; }}
+            a.button {{
                 display: inline-block;
-                padding: 8px 15px;
-                background: #2ecc71;
-                color: white;
-                border-radius: 20px;
-                font-size: 14px;
-            }}
-            .endpoint {{
-                margin: 20px 0;
-                padding: 15px;
-                border: 1px solid #ddd;
-                border-radius: 4px;
-            }}
-            .method {{
-                display: inline-block;
-                padding: 4px 8px;
+                margin-top: 20px;
+                padding: 12px 24px;
                 background: #3498db;
                 color: white;
                 border-radius: 4px;
-                font-size: 12px;
-                margin-right: 10px;
+                text-decoration: none;
+                font-weight: bold;
+                font-size: 16px;
             }}
-            .path {{
-                font-family: monospace;
-                font-size: 14px;
-                color: #2c3e50;
-            }}
-            .description {{
-                margin-top: 5px;
-                color: #666;
+            .api-note {{
+                margin-top: 30px;
+                color: #888;
+                font-size: 15px;
             }}
         </style>
     </head>
     <body>
         <div class="container">
-            <h1>Rella Analytics API <span class="status">Running</span></h1>
-            
-            <h2>Available Endpoints</h2>
-            <div class="endpoints">
-                {endpoint_html}
+            <h1>Rella Analytics API Server</h1>
+            <p>This is the backend API server.<br>
+            To use the Rella Analytics app, please visit:</p>
+            <a class="button" href="{frontend_url}">{frontend_url}</a>
+            <div class="api-note">
+                <p>If you are a developer, see the <a href="/api/v1/auth/login">API endpoints</a> or use the API programmatically.</p>
             </div>
-            
-            <h2>API Information</h2>
-            <ul>
-                <li>All endpoints require authentication except /api/v1/auth/login</li>
-                <li>Data is cached for 5 minutes by default</li>
-                <li>Use /api/v1/cache/clear to manually clear cached data</li>
-            </ul>
         </div>
     </body>
     </html>
