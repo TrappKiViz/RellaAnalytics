@@ -1788,7 +1788,7 @@ def index():
         return jsonify({"message": "Rella Analytics API is running"}), 200
     
     # Otherwise return HTML with a clear message and a link to the frontend
-    frontend_url = "https://rella-analytics-frontend.onrender.com"
+    frontend_url = "https://rellaanalyticsdb.onrender.com"
     html = f"""
     <!DOCTYPE html>
     <html>
