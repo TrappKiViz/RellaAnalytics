@@ -1,5 +1,5 @@
 # Backend Requirements
-
+statsmodels==0.14.4
 # Flask Core & Utilities
 Flask>=2.0
 Flask-Cors>=3.0
