@@ -1,0 +1,106 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "valuePerSqm": 150.5,
+        "growth": 5.2,
+        "name": "Napa Block A"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-122.30, 38.30],
+            [-122.28, 38.30],
+            [-122.28, 38.32],
+            [-122.30, 38.32],
+            [-122.30, 38.30]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "valuePerSqm": 180.0,
+        "growth": 3.1,
+        "name": "Napa Block B"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-122.28, 38.28],
+            [-122.26, 38.28],
+            [-122.26, 38.30],
+            [-122.28, 38.30],
+            [-122.28, 38.28]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "valuePerSqm": 120.8,
+        "growth": 1.5,
+        "name": "Vacaville Block X"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-122.00, 38.35],
+            [-121.98, 38.35],
+            [-121.98, 38.37],
+            [-122.00, 38.37],
+            [-122.00, 38.35]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "valuePerSqm": 135.2,
+        "growth": 2.8,
+        "name": "Vacaville Block Y"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-121.98, 38.33],
+            [-121.96, 38.33],
+            [-121.96, 38.35],
+            [-121.98, 38.35],
+            [-121.98, 38.33]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Outlier Zone",
+        "valuePerParcel": 700000,
+        "valuePerSqm": 400,
+        "growth": 1.1 
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-122.12, 38.42],
+            [-122.10, 38.42],
+            [-122.10, 38.40],
+            [-122.12, 38.40],
+            [-122.12, 38.42]
+          ]
+        ]
+      }
+    }
+  ]
+} 

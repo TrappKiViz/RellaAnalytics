@@ -37,7 +37,8 @@ function downloadCSV(data, filename = 'data.csv') {
 }
 
 function ProfitOverview() {
-  const { loading, error, kpiData } = useOutletContext();
+  const outletContext = useOutletContext() || {};
+  const { loading, error, kpiData } = outletContext;
   console.log('ProfitOverview loading:', loading);
   console.log('ProfitOverview error:', error);
   console.log('ProfitOverview kpiData:', kpiData);

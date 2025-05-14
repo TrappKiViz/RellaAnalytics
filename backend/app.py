@@ -10,7 +10,7 @@ dotenv_path = os.path.join(basedir, '..', '.env')
 load_dotenv(dotenv_path=dotenv_path) # Use explicit path
 
 # Now import other things
-from flask import Flask, jsonify, request, g, session, send_from_directory # Add session and send_from_directory
+from flask import Flask, jsonify, request, g, session, send_from_directory, render_template, abort # Add session, send_from_directory, render_template, and abort
 from flask_cors import CORS # Import CORS
 import random
 import sqlite3 # Import sqlite3
@@ -35,7 +35,7 @@ from . import boulevard_client
 from backend.database import get_db
 from backend.constants import BOULEVARD_CATEGORY_MAPPING
 
-app = Flask(__name__, instance_relative_config=True) # Enable instance folder
+app = Flask(__name__, instance_relative_config=True, static_folder='static', static_url_path='') # Serve static files at root
 CORS(app, 
     resources={r"/api/*": {
         "origins": [
@@ -379,8 +379,6 @@ def _make_cache_key(*args, **kwargs):
     return f"{key}|{args}"
 
 @app.route('/api/v1/sales/by_category', methods=['GET'])
-@login_required
-@cache.cached(timeout=300, key_prefix=_make_cache_key)  # Cache for 5 minutes
 def get_sales_by_category():
     """Retrieves sales data broken down by treatment category from Boulevard API."""
     try:
@@ -462,8 +460,6 @@ def get_sales_by_category():
         return jsonify({"error": f"Failed to generate category breakdown: {str(e)}"}), 500
 
 @app.route('/api/v1/sales/over_time', methods=['GET'])
-@login_required
-@cache.cached(timeout=300, key_prefix=_make_cache_key)  # Cache for 5 minutes
 def get_sales_over_time():
     """Retrieves time-series sales data from Boulevard API."""
     try:
@@ -600,7 +596,6 @@ def get_sales_over_time():
         return jsonify({"error": f"Failed to generate time-series data: {str(e)}"}), 500
 
 @app.route('/api/v1/sales/forecast', methods=['GET'])
-@login_required
 def get_sales_forecast():
     """Generates a sales forecast using Prophet based on historical Boulevard orders."""
     # Get filters and forecast days from request
@@ -718,7 +713,6 @@ def get_sales_forecast():
 # --- Utility Endpoints ---
 
 @app.route('/api/v1/locations', methods=['GET'])
-@login_required
 def get_locations():
     """Retrieves list of available locations from Boulevard API."""
     try:
@@ -755,7 +749,6 @@ def get_locations():
         return jsonify({"error": "An internal server error occurred."}), 500
 
 @app.route('/api/v1/treatment_categories', methods=['GET'])
-@login_required
 def get_treatment_categories():
     """Retrieves list of treatment categories from the database."""
     db = get_db()
@@ -765,7 +758,6 @@ def get_treatment_categories():
     # OLD MOCK: return jsonify(MOCK_TREATMENT_CATEGORIES)
 
 @app.route('/api/v1/services', methods=['GET'])
-@login_required
 def get_services():
     """Retrieves list of services from the database (optionally filter by category)."""
     db = get_db()
@@ -789,7 +781,6 @@ def get_services():
     #     return jsonify(MOCK_SERVICES)
 
 @app.route('/api/v1/products', methods=['GET'])
-@login_required
 def get_products():
     """Retrieves list of products from the database."""
     db = get_db()
@@ -799,7 +790,6 @@ def get_products():
     # OLD MOCK: return jsonify(MOCK_PRODUCTS)
 
 @app.route('/api/v1/employees', methods=['GET'])
-@login_required
 def get_employees():
     """Retrieves list of active employees from the database (optionally filter by location)."""
     db = get_db()
@@ -824,7 +814,6 @@ def get_employees():
 
 # New endpoint to fetch customer coordinates
 @app.route('/api/v1/customers/locations', methods=['GET'])
-@login_required
 def get_customer_locations():
     """Retrieves latitude and longitude for all customers.
        NOTE: Currently uses simulated coordinates from seeding.
@@ -868,7 +857,6 @@ def allowed_file(filename):
 # --- Data Upload Endpoints ---
 
 @app.route('/api/v1/data/upload/validate_transactions', methods=['POST'])
-@login_required
 def validate_transaction_upload():
     """Validates an uploaded transaction CSV file structure."""
     if 'file' not in request.files:
@@ -918,7 +906,6 @@ def validate_transaction_upload():
         return jsonify({"error": "Invalid file type. Only CSV files are allowed."}), 400
 
 @app.route('/api/v1/data/upload/process_transactions', methods=['POST'])
-@login_required
 def process_transaction_upload():
     """Processes a validated transaction CSV: Clears old data and inserts new."""
     if 'file' not in request.files:
@@ -1157,7 +1144,6 @@ def login():
         return jsonify({"message": "Invalid username or password"}), 401
 
 @app.route('/api/v1/auth/logout', methods=['POST'])
-# @login_required # Protect logout route - REMOVED as @login_required decorator uses flask_login one
 def logout():
     logout_user() # Use Flask-Login function
     # session.clear() # logout_user handles session
@@ -1173,7 +1159,6 @@ def auth_status():
 
 # --- NEW Category Mapping Endpoint ---
 @app.route('/api/category-mappings', methods=['GET'])
-# @login_required # Consider if this needs auth
 def get_category_mappings():
     """Returns the defined mapping from Boulevard service/product names to categories."""
     return jsonify(BOULEVARD_CATEGORY_MAPPING)
@@ -1181,7 +1166,6 @@ def get_category_mappings():
 
 # --- NEW: Profit Calculation Endpoint ---
 @app.route('/api/v1/profit/by_category', methods=['GET'])
-@login_required
 def get_profit_by_category():
     """
     Calculates total profit (revenue - cost) for each item category based on DB data.
@@ -1352,7 +1336,6 @@ app.cli.add_command(test_boulevard_command)
 
 # --- NEW: Categorized Boulevard Orders Endpoint ---
 @app.route('/api/v1/boulevard/categorized-orders', methods=['GET'])
-# @login_required # Temporarily disabled for testing category mapping
 def get_categorized_orders():
     """Fetches historical orders from Boulevard, adds category mapping, and returns.
     Accepts optional query parameters: 
@@ -1488,7 +1471,6 @@ def _make_cache_key(*args, **kwargs):
     return f"{key}|{args}"
 
 @app.route('/api/v1/kpis', methods=['GET'])
-@login_required
 @cache.cached(timeout=300, key_prefix=_make_cache_key)  # Cache for 5 minutes
 def get_kpis():
     """Retrieves KPI data including profitability metrics from Boulevard API."""
@@ -1626,7 +1608,6 @@ def get_orders_for_date_range(start_date, end_date):
         return []
 
 @app.route('/api/v1/sales/summary', methods=['GET'])
-@login_required
 @cache.cached(timeout=300, key_prefix=_make_cache_key)  # Cache for 5 minutes
 def get_sales_summary():
     """Retrieves aggregated sales summary data from Boulevard API."""
@@ -1750,7 +1731,6 @@ def get_sales_summary():
         return jsonify({"error": f"Failed to generate sales summary: {str(e)}"}), 500
 
 @app.route('/api/v1/cache/clear', methods=['POST'])
-@login_required
 def clear_cache():
     """Clear all cached data. Requires authentication."""
     try:
@@ -1780,69 +1760,13 @@ def clear_sales_caches():
     except Exception as e:
         print(f"Error clearing sales caches: {e}")
 
-@app.route('/', methods=['GET'])
-def index():
-    """Landing page with API information and available endpoints"""
-    # Check if request wants JSON
-    if request.headers.get('Accept') == 'application/json':
-        return jsonify({"message": "Rella Analytics API is running"}), 200
-    
-    # Otherwise return HTML with a clear message and a link to the frontend
-    frontend_url = "https://rellaanalyticsdb.onrender.com"
-    html = f"""
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>Rella Analytics API</title>
-        <style>
-            body {{
-                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-                line-height: 1.6;
-                max-width: 600px;
-                margin: 0 auto;
-                padding: 40px;
-                background: #f5f5f5;
-            }}
-            .container {{
-                background: white;
-                padding: 30px;
-                border-radius: 8px;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-                text-align: center;
-            }}
-            h1 {{ color: #2c3e50; }}
-            a.button {{
-                display: inline-block;
-                margin-top: 20px;
-                padding: 12px 24px;
-                background: #3498db;
-                color: white;
-                border-radius: 4px;
-                text-decoration: none;
-                font-weight: bold;
-                font-size: 16px;
-            }}
-            .api-note {{
-                margin-top: 30px;
-                color: #888;
-                font-size: 15px;
-            }}
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <h1>Rella Analytics API Server</h1>
-            <p>This is the backend API server.<br>
-            To use the Rella Analytics app, please visit:</p>
-            <a class="button" href="{frontend_url}">{frontend_url}</a>
-            <div class="api-note">
-                <p>If you are a developer, see the <a href="/api/v1/auth/login">API endpoints</a> or use the API programmatically.</p>
-            </div>
-        </div>
-    </body>
-    </html>
-    """
-    return html
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve_react_app(path):
+    # Let Flask serve static files and API routes
+    if path.startswith('api/') or path.startswith('static/') or path.startswith('assets/'):
+        abort(404)
+    return render_template('index.html')
 
 @app.route('/api/test-boulevard-connection', methods=['GET'])
 def test_boulevard_connection():
