@@ -10,6 +10,9 @@ npm run build
 # Return to backend directory
 Pop-Location
 
+# Install the backend package in development mode
+pip install -e .
+
 # Ensure static and templates directories exist
 if (!(Test-Path "./static")) { New-Item -ItemType Directory -Path "./static" }
 if (!(Test-Path "./templates")) { New-Item -ItemType Directory -Path "./templates" }
