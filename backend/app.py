@@ -42,8 +42,7 @@ CORS(app,
             "http://localhost:5173",  # Vite default port
             "http://localhost:5174",  # Vite alternate port
             "http://localhost:3000",  # React default port (if needed)
-            "https://rella-analytics-frontend.onrender.com",  # Deployed frontend URL
-            "https://rellaanalyticsdb.onrender.com",  # Alternate deployed frontend URL
+            "https://rellaanalyticsdb.onrender.com",  # Deployed frontend URL (actual)
             os.getenv('FRONTEND_URL', '')  # Production URL if defined
         ],
         "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
