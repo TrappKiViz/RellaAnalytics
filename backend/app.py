@@ -2,6 +2,7 @@ import os # Import os
 from dotenv import load_dotenv # Keep load_dotenv import here
 import csv
 import difflib
+import re # Add import for regex pattern matching
 
 # Load environment variables from .env file FIRST
 # Construct path relative to this file (app.py)
@@ -42,6 +43,8 @@ CORS(app,
             "http://localhost:5173",  # Vite default port
             "http://localhost:5174",  # Vite alternate port
             "http://localhost:3000",  # React default port (if needed)
+            "http://127.0.0.1:5173",  # Also allow localhost as IP
+            "http://127.0.0.1:5174", 
             "https://rellaanalyticsdb.onrender.com",  # Deployed frontend URL (actual)
             os.getenv('FRONTEND_URL', '')  # Production URL if defined
         ],
@@ -1815,6 +1818,30 @@ def test_boulevard_connection():
         print(f"Connection error: {result}")
         return jsonify(result), 500
 
+# --- Injectable Unit Costs Lookup ---
+INJECTABLE_UNIT_COSTS = {
+    "Botox": 10.50,          # Cost per unit
+    "Dysport": 4.00,         # Cost per unit (typically 2.5-3x units vs Botox)
+    "Juvederm Ultra XC": 275.00,     # Cost per syringe
+    "Juvederm Voluma XC": 325.00,    # Cost per syringe
+    "Juvederm Vollure XC": 300.00,   # Cost per syringe
+    "Juvederm Volbella XC": 295.00,  # Cost per syringe
+    "Restylane": 250.00,             # Cost per syringe
+    "Restylane Lyft": 280.00,        # Cost per syringe
+    "Restylane Kysse": 290.00,       # Cost per syringe
+    "Restylane Defyne": 300.00,      # Cost per syringe
+    "Restylane Refyne": 290.00,      # Cost per syringe
+    "Restylane Contour": 295.00,     # Cost per syringe
+}
+
+# Patterns to match quantity in item names
+INJECTABLE_PATTERNS = {
+    r"(\d+)\s+Botox": "Botox",               # Matches "26 Botox"
+    r"(\d+)\s+Dysport": "Dysport",           # Matches "60 Dysport"
+    r"(\d+)\s+Juvederm\s+(.+)": "Juvederm {}", # Matches "1 Juvederm Ultra XC"
+    r"(\d+)\s+Restylane\s+(.+)": "Restylane {}", # Matches "1 Restylane Lyft"
+}
+
 def calculate_kpis(orders, db):
     """Calculate KPIs from Boulevard orders data."""
     try:
@@ -1894,6 +1921,10 @@ def calculate_kpis(orders, db):
 
                 # Process line items for detailed analysis
                 order_cost = 0.0
+                
+                # Track injectable items for special handling
+                injectable_items = []
+                
                 if 'lineGroups' in order:
                     for group in order['lineGroups']:
                         if 'lines' not in group:
@@ -1906,19 +1937,101 @@ def calculate_kpis(orders, db):
                             # Get item name and type
                             item_name = line.get('name', 'Unknown Item')
                             item_type = 'service' if line.get('__typename') == 'OrderServiceLine' else 'product'
-
-                            # Calculate line item cost
-                            # First try to get cost from inventory map
+                            
+                            # Check if this is an injectable item with quantity in name (like "26 Botox")
+                            injectable_product = None
+                            units = 0
+                            
+                            # Try to match patterns for injectable items with quantities
+                            for pattern, product_template in INJECTABLE_PATTERNS.items():
+                                match = re.match(pattern, item_name)
+                                if match:
+                                    units = int(match.group(1))  # Extract quantity
+                                    if "{}" in product_template:
+                                        # Handle patterns with product variant in name (like "Juvederm Ultra XC")
+                                        variant = match.group(2)
+                                        injectable_product = product_template.format(variant)
+                                    else:
+                                        injectable_product = product_template
+                                    
+                                    # If this is an injectable item with $0 revenue, store it for later use
+                                    if line_amount == 0 and units > 0:
+                                        injectable_items.append({
+                                            "product": injectable_product,
+                                            "units": units
+                                        })
+                                    break
+                            
+                            # Calculate line item cost - first try inventory, then injectables lookup
                             unit_cost = 0.0
                             if item_name in inventory_cost_map:
                                 unit_cost = inventory_cost_map[item_name]['avg_unit_cost']
+                            elif injectable_product and injectable_product in INJECTABLE_UNIT_COSTS:
+                                unit_cost = INJECTABLE_UNIT_COSTS[injectable_product]
                             else:
-                                # Fallback to default cost percentages
-                                if item_type == 'product':
+                                # Check if the item is "NEW PATIENT BOTOX/DYSPORT" or "Dermal Fillers"
+                                # These items capture revenue for injectables with $0 in the other line items
+                                if (item_name == "NEW PATIENT BOTOX/DYSPORT" or 
+                                    item_name == "Botox/Dysport Return Clients" or
+                                    item_name.startswith("Botox") or
+                                    item_name.startswith("Dysport")):
+                                    # Find matching Botox/Dysport entries with units
+                                    botox_units = sum(item["units"] for item in injectable_items 
+                                                     if "Botox" in item["product"] or "Dysport" in item["product"])
+                                    if botox_units > 0:
+                                        # Use standard cost for all Botox units
+                                        base_unit_cost = INJECTABLE_UNIT_COSTS.get("Botox", 10.50)
+                                        unit_cost = 0  # We'll calculate the total cost separately
+                                        line_cost = botox_units * base_unit_cost
+                                        order_cost += line_cost
+                                        
+                                        # Update item tracking with actual cost
+                                        items_tracking[item_name].update({
+                                            "name": item_name,
+                                            "type": item_type,
+                                            "quantity": items_tracking[item_name]["quantity"] + 1,  # Count as 1 service
+                                            "total_sales": items_tracking[item_name]["total_sales"] + line_amount,
+                                            "total_cost": items_tracking[item_name]["total_cost"] + line_cost
+                                        })
+                                        
+                                        # Skip the rest of processing for this item since we've handled it
+                                        continue
+                                        
+                                elif (item_name == "Dermal Fillers" or
+                                      "Filler" in item_name or
+                                      "Juvederm" in item_name or
+                                      "Restylane" in item_name):
+                                    # Find matching filler entries
+                                    filler_costs = 0
+                                    for item in injectable_items:
+                                        if ("Juvederm" in item["product"] or 
+                                            "Restylane" in item["product"]):
+                                            product_cost = INJECTABLE_UNIT_COSTS.get(item["product"], 0)
+                                            filler_costs += product_cost * item["units"]
+                                    
+                                    if filler_costs > 0:
+                                        unit_cost = 0  # We'll use the calculated cost
+                                        line_cost = filler_costs
+                                        order_cost += line_cost
+                                        
+                                        # Update item tracking with actual cost
+                                        items_tracking[item_name].update({
+                                            "name": item_name,
+                                            "type": item_type,
+                                            "quantity": items_tracking[item_name]["quantity"] + 1,  # Count as 1 service
+                                            "total_sales": items_tracking[item_name]["total_sales"] + line_amount,
+                                            "total_cost": items_tracking[item_name]["total_cost"] + line_cost
+                                        })
+                                        
+                                        # Skip the rest of processing for this item
+                                        continue
+                                        
+                                # Only use fallback for products, services will be 0
+                                elif item_type == 'product':
                                     unit_cost = line_amount * 0.4  # 40% cost for products
-                                else:
-                                    unit_cost = line_amount * 0.3  # 30% cost for services
+                                # No fallback for services - leave cost at 0
 
+                            # Standard processing for normal line items
                             quantity = line.get('quantity', 1)
                             line_cost = unit_cost * quantity
                             order_cost += line_cost
@@ -1931,8 +2044,8 @@ def calculate_kpis(orders, db):
                                 "total_sales": items_tracking[item_name]["total_sales"] + line_amount,
                                 "total_cost": items_tracking[item_name]["total_cost"] + line_cost
                             })
+                            
                             # Calculate and update profit metrics for the item
-                            item_profit = line_amount - line_cost
                             items_tracking[item_name]["total_profit"] = items_tracking[item_name]["total_sales"] - items_tracking[item_name]["total_cost"]
                             items_tracking[item_name]["profit_margin"] = (
                                 (items_tracking[item_name]["total_profit"] / items_tracking[item_name]["total_sales"] * 100)
@@ -1951,8 +2064,10 @@ def calculate_kpis(orders, db):
                                     "type": item_type,
                                     "total_amount": discount_tracking[discount_name]["total_amount"] + discount_amount,
                                     "usage_count": discount_tracking[discount_name]["usage_count"] + 1,
-                                    # Estimate profit impact (assuming discount directly reduces profit)
-                                    "profit_impact": discount_tracking[discount_name]["profit_impact"] - (discount_amount * (0.6 if item_type == 'product' else 0.7))
+                                    # For profit impact, use actual unit cost if available, otherwise no impact
+                                    "profit_impact": discount_tracking[discount_name]["profit_impact"] - (
+                                        discount_amount if unit_cost > 0 else 0
+                                    )
                                 })
 
                 # Calculate order profit and add to totals
